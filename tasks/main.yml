@@ -4,12 +4,17 @@
   with_first_found:
     - "{{ ansible_distribution|lower }}-{{ ansible_distribution_major_version}}.yml"
     - "{{ ansible_distribution|lower }}.yml"
+    - "{{ ansible_os_family|lower }}.yml"
   tags:
     - nginx-base
     - vars
 
 - name: include install tasks
-  include_tasks: install_{{ ansible_distribution|lower }}.yml
+  include_tasks: "{{ item }}"
+  with_first_found:
+    - "install_{{ ansible_distribution|lower }}-{{ ansible_distribution_major_version}}.yml"
+    - "install_{{ ansible_distribution|lower }}.yml"
+    - "install_{{ ansible_os_family|lower }}.yml"
   tags:
     - nginx-base
     - vars

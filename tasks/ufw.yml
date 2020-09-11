@@ -1,0 +1,22 @@
+---
+- name: Ensure ufw is installed
+  include_tasks: ufw/install.yml
+  when: nginx_ufw_install
+
+- name: Install ufw rule for HTTP and HTTPS
+  copy:
+    src: ufw-web
+    dest: "{{ nginx_ufw_path }}/custom-web"
+  notify:
+    - Reload ufw
+  tags:
+    - nginx-base
+    - ufw
+
+- name: Ensure ufw allows web traffic
+  ufw:
+    rule: allow
+    name: web
+  tags:
+    - nginx-base
+    - ufw

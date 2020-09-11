@@ -1,0 +1,9 @@
+---
+- name: Install ufw packages
+  package:
+    name: "{{ nginx_ufw_packages }}"
+    state: present
+  tags:
+    - nginx-base
+    - packages
+    - ufw

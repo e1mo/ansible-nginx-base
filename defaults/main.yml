@@ -2,6 +2,9 @@
 mozilla_configuration: modern
 
 nginx_user: http
+nginx_packages:
+  - nginx
+
 nginx_dhparams_path: /etc/ssl/nginx.dhparams
 nginx_dhparams_size: 4096
 
@@ -17,6 +20,10 @@ nginx_acme_challenge: true
 nginx_acme_challenge_path: /usr/share/nginx/letsencrypt
 nginx_acme_redirect: false
 
+nginx_ufw_skip: false
+nginx_ufw_install: true
+nginx_ufw_packages:
+  - ufw
 nginx_ufw_path: /etc/ufw/applications.d
 
 nginx_base_conf: true

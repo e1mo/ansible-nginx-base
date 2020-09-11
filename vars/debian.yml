@@ -1,1 +1,4 @@
 nginx_user: www-data
+nginx_debian_repo: "deb http://nginx.org/packages/{{ ansible_distribution|lower }}/ {{ ansible_distribution_release|lower }} nginx"
+nginx_debian_repo_keyurl: https://nginx.org/keys/nginx_signing.key
+nginx_debian_repo_keyid: 573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62

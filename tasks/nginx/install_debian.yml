@@ -1,0 +1,34 @@
+---
+- name: Add nginx deb repository signing key
+  apt_key:
+    url: "{{ nginx_debian_repo_keyurl }}"
+    id: "{{ nginx_debian_repo_keyid }}"
+    state: present
+  tags:
+    - nginx-base
+    - packages
+    - apt
+
+- name: Add nginx deb repository
+  apt_repository:
+    repo: "{{ nginx_debian_repo }}"
+    state: present
+  tags:
+    - nginx-base
+    - packages
+    - apt
+
+- name: Update apt cache
+  apt:
+    update_cache: yes
+  tags:
+    - nginx-base
+    - packages
+    - apt
+
+- name: Run default installation tasks
+  include_tasks: "install_default.yml"
+  tags:
+    - nginx-base
+    - packages
+    - apt
